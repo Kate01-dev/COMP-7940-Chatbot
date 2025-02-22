@@ -1,10 +1,18 @@
-import configparser
-config = configparser.ConfigParser()
-config.read('7940_lab3/config.ini')
+ 
+import telegram 
+import telegram.ext
+import configparser 
+import redis
 
-# print 
-# Check if the 'TELEGRAM' section exists
-if 'TELEGRAM' in config:
-    print(config.get('TELEGRAM', 'ACCESS_TOKEN'))
-else:
-    print("Section 'TELEGRAM' not found in the config file.")
+config=configparser.ConfigParser()
+config.read('7940_lab3/config.ini')
+redis1 = redis.Redis(host=(config['REDIS']['HOST']),
+                         password=(config['REDIS']['PASSWORD']),
+                         port=(config['REDIS']['REDISPORT']),
+                         decode_responses=(config['REDIS']['DECODE_RESPONSE']),
+                         username=(config['REDIS']['USER_NAME']))
+print(config['REDIS']['PASSWORD'])
+print(config['REDIS']['REDISPORT'])
+print(config['REDIS']['USER_NAME'])
+print(config['REDIS']['DECODE_RESPONSE'])
+print(redis1.ping())
